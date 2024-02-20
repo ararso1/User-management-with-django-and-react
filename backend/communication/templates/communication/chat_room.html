@@ -1,0 +1,21 @@
+<!-- chat_room.html -->
+
+{% block content %}
+<h2>Chat Room: {{ room.title }}</h2>
+
+<div id="message-list">
+    {% for message in messages %}
+    <div class="message">
+        <strong>{{ message.sender.username }}:</strong> {{ message.message }}
+        <span>{{ message.timestamp|date:"DATETIME_FORMAT" }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<form method="post" action="{% url 'communication:send_message' %}">
+    {% csrf_token %}
+    <input type="hidden" name="room_id" value="{{ room.id }}">
+    <textarea name="message" required></textarea>
+    <button type="submit">Send</button>
+</form>
+{% endblock %}

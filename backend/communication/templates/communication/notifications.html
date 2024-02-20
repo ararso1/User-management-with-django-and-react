@@ -1,0 +1,13 @@
+
+{% block content %}
+<h2>Your Notifications</h2>
+
+<div id="notification-list">
+    {% for notification in notifications %}
+    <div class="notification">
+        {{ notification.message }}
+        <span>{{ notification.timestamp|date:"DATETIME_FORMAT" }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
