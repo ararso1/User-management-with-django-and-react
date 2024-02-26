@@ -107,7 +107,7 @@ def create_or_update_user_profile(user, first_name, last_name, user_email, photo
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admins'])
 def deactivate_user(request, userdeact_id):
-    user = CustomUser.objects.get(pk=userdeact_id)
+    user = User.objects.get(pk=userdeact_id)
     user.is_active = False
     user.save()
     return redirect('admin_page')
@@ -119,7 +119,7 @@ def deactivate_user(request, userdeact_id):
 def admin_page(request):
     search_query = request.GET.get('search', '')  # Get the search parameter from the URL
     admin_group = Group.objects.get(name='admins')
-    users = CustomUser.objects.exclude(groups=admin_group).filter(is_active=True)
+    users = User.objects.exclude(groups=admin_group).filter(is_active=True)
 
     # Apply search filter if search_query is not empty
     if search_query:
@@ -152,7 +152,7 @@ def admin_page(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admins'])
 def delete_user(request, user_id):
-    user=CustomUser.objects.get(id=user_id)
+    user=User.objects.get(id=user_id)
     user.delete()
     return render(request, 'user_template/Admin/admin_page.html')
 
