@@ -1,5 +1,5 @@
 
-```markdown
+
 # User Management System
 
 This project is a **User Management System** designed for institutions to handle their users from a single platform. The system allows for efficient management of user data, providing a central point for managing user roles, permissions, and other administrative tasks. The system is built with a **Django** backend and a **React** frontend, integrated using **REST APIs** to ensure seamless communication between the server and client.
