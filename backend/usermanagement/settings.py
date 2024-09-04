@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+
     'rest_framework_simplejwt',
     'usermanagement_app',
     'login_history',
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework.authtoken',
     'auditlog',
-    'communication',
+    
     
 ]
 

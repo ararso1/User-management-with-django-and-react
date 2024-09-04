@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('usermanagement_app.urls')),
     path('api/',include('api.urls')),
-    path('communication/', include('communication.urls')),
+    #path('communication/', include('communication.urls')),
    
     #re_path(r'^api/students/([0-9])$', views.students_detail),
     #path('accounts/', include('django.contrib.auth.urls')),

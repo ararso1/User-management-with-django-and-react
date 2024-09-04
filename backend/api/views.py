@@ -102,6 +102,10 @@ def lists_of_user(request):
         di.append(d)
     return Response(di) """
 
+@api_view(['GET']) # Ensures that this view can only be accessed via a POST request for security
+def logout_view(request):
+    logout(request)
+    return Response({'message': 'logged out successfully.'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def user_login(request):
@@ -206,7 +210,7 @@ def user_profile(request):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-
+    
 
 @api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
@@ -323,12 +327,13 @@ def change_password(request):
     # Check if the old password is correct
     if not user.check_password(old_password):
         return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    else:
+        # Set the new password
+        user.set_password(new_password)
+        user.save()
 
-    # Set the new password
-    user.set_password(new_password)
-    user.save()
-
-    return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
 
 
 @api_view(['DELETE'])
